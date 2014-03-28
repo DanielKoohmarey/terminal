@@ -178,15 +178,15 @@ that hook into the terminal independently.
 
 ### Asynchronously reacting to commands (or other complex uses)
 
-If your app need to do asynchronous work or output multiple lines in reaction to a command, you can use the `\_print` function passed to the `execute` callback instead of just returning a line:
+If your app need to do asynchronous work or output multiple lines in reaction to a command, you can use the `term` object's `output` function -- this is passed to the `execute` callback -- instead of just returning a line:
 
 ```js
 var terminal = new Terminal('terminal', {}, {
-	execute: function(cmd, args, _print) {
+	execute: function(cmd, args, term) {
 		switch (cmd) {
 			case 'asyncHello':
                 ajax.get('http://location.example.com/', function (location) {
-                  _print('hello ' + location + '!');
+                  term.output('hello ' + location + '!');
                 })
 				return 'asynchronously fetching your location...';
 
