@@ -10,27 +10,36 @@ seq()
   .seq(function () {
     // Compile coffee-script
     exec('./node_modules/.bin/coffee --compile --bare --output build/temp lib/browser.coffee')
-    exec('./node_modules/.bin/coffee --compile --bare --output build/temp lib/node.coffee')
+    exec('./node_modules/.bin/coffee --compile --bare --output build/temp lib/console.coffee')
     exec('./node_modules/.bin/coffee --compile --bare --output build/temp lib/colors.coffee')
+    exec('./node_modules/.bin/coffee --compile --bare --output build/temp lib/parseArgs.coffee')
     exec('./node_modules/.bin/coffee --compile --bare --output build/temp lib/tables.coffee')
+    exec('./node_modules/.bin/coffee --compile --bare --output build/temp index.coffee')
 
     // Browserify
-    exec('./node_modules/.bin/browserify build/temp/browser.js --standalone terminal --outfile dist/browser.js')
-    exec('./node_modules/.bin/browserify build/temp/node.js --standalone terminal --outfile dist/node.js')
+    exec('./node_modules/.bin/browserify build/temp/index.js --standalone terminal --outfile dist/terminal.js')
+    console.log('x')
   })
   .par(function () {
     // Read in the less stylesheet.
+    console.log('x')
     fs.readFile('lib/terminal.less', 'ascii', this);
+    console.log('x')
   })
   .par(function () {
     // Read in 'interlace.png'.
+    console.log('x')
     fs.readFile('lib/interlace.png', this);
+    console.log('x')
   })
   .par(function () {
     // Read in 'external.png'.
+    console.log('x')
     fs.readFile('lib/external.png', this);
+    console.log('x')
   })
   .seq(function(styles, interlacepng, externalpng) {
+    console.log(styles)
     // Convert to string.
     styles = '' + styles;
 
