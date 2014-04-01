@@ -12,26 +12,18 @@
   "licenses": [{ "type": "MIT", "url": "https://raw.github.com/fiatjaf/terminal/master/LICENSE" }],
   "repository": { "type": "git", "url": "http://github.com/fiatjaf/terminal" },
   "scripts": {
-    "build": "./node_modules/.bin/browserify --standalone Terminal -t coffeeify -t brfs --extension='.coffee' index.coffee -d --outfile dist/terminal.js"
+    "prepublish": "./configure"
   },
   "directories": {
     "lib": "lib"
-  },
-  "browser": {
-    "less": "./lib/less.js"
-  },
-  "browserify-shim": {
-    "less": "less"
   },
   "dependencies": {
     
   },
   "devDependencies": {
-    "coffeeify": "0.6.0",
+    "less": "1.3.3",
+    "insert-css": "0.1.1",
     "browserify": "2.35.4",
-    "browserify-shim": ">= 3.0.0",
-    "mime": "1.2.x",
-    "insert-css": ">= 0.1.1",
-    "brfs": "1.0.0"
+    "coffee-script": "1.7.1"
   }
 }
