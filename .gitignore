@@ -1,4 +1,6 @@
 node_modules
+lib/*.js
+index.js
 build/temp
 dist
 *.swp

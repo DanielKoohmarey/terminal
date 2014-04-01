@@ -26,7 +26,7 @@ module.exports = (line) ->
         arg += letter
       return
 
-    realArgs.push arg # add what is at the end
+    realArgs.push arg.trim() # add what is at the end
     
     # Filter empty
     args = realArgs
@@ -37,7 +37,7 @@ module.exports = (line) ->
     args = args.splice(1) # Remove cmd from arg list.
 
   return {
-    cmd: cmd
+    cmd: cmd.trim()
     args: args
     line: line
   }
