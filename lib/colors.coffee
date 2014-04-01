@@ -79,6 +79,7 @@ styles =
     'magentaBG' : ['<span style="background-color:magenta;">', '</span>']
     'redBG'     : ['<span style="background-color:red;">',     '</span>']
     'yellowBG'  : ['<span style="background-color:yellow;">',  '</span>']
+colors.styles = Object.keys styles.console
 
 stylize = (style, str) ->
   if mode not in ['browser', 'console']

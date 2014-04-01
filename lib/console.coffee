@@ -30,6 +30,8 @@ module.exports = (containerID, options) ->
       console.log str
     return null
 
+  @format = @f = require './formatting'
+
   prompt = (callback) ->
     stdin = process.stdin
     stdout = process.stdout

@@ -194,6 +194,8 @@ module.exports = (containerID, options) ->
       return
   @output = output
 
+  @format = @f = require './formatting'
+
   @setPrompt = (prompt) ->
     _prompt.innerHTML = prompt + options.separator
     return
