@@ -4,10 +4,10 @@ colors = require './colors'
 
 formatting = {}
 module.exports = formatting
-if typeof module != 'undefined'
-  mode = 'console'
-else
+if typeof window != 'undefined'
   mode = 'browser'
+else
+  mode = 'console'
 
 for style in colors.styles
     formatting[style] = colors[style]
@@ -31,7 +31,7 @@ formatting.link = formatting.href = formatting.a = (command, text) ->
     else
       return "#{text} [#{colors.underline command.join ' '}]"
   else if mode == 'browser'
-    return "<a href='#!/#{command.join '/'}'>"
+    return "<a href='#!/#{command.join '/'}'>#{text}</a>"
   else
     return ''
 

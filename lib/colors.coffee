@@ -25,10 +25,10 @@
 
 colors = {}
 module.exports = colors
-if typeof module != 'undefined'
-  mode = 'console'
-else
+if typeof window != 'undefined'
   mode = 'browser'
+else
+  mode = 'console'
 
 styles =
   'console':

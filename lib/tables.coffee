@@ -1,10 +1,15 @@
 # module 'tables'
 
-colors = require './colors'
 
 module.exports = (header, rows, opts={}) ->
   # header: [] or null
   # rows: [[]]
+
+  colors = require './colors'
+  formatting = require './formatting'
+  String.prototype.len = ->
+    @.split()[0].replace(/<([^>]*)>/g, '')
+                .replace(/\[[^m]+m/g, '').length
 
   if header and header.length
     rows.unshift header # everything is a normal row
@@ -50,8 +55,6 @@ module.exports = (header, rows, opts={}) ->
         styledContent = numberColor row[col]
       else if typeof row[col] == 'string'
         styledContent = textColor row[col]
-      else
-        styledContent = grey row[col]
       styledRow[col] = styledContent
 
       # stringify everything
@@ -60,7 +63,7 @@ module.exports = (header, rows, opts={}) ->
     # get largest content in each column
     largest[col] = 0
     for row in rows
-      largest[col] = row[col].length if row[col] and row[col].length > largest[col]
+      largest[col] = row[col].len() if row[col] and row[col].len() > largest[col]
 
   # helper functions
   buildLine = (style=borderColor) ->
@@ -71,7 +74,7 @@ module.exports = (header, rows, opts={}) ->
       for char in [0..largest[col]]
         line += style '-'
       line += borderColor '+' # padding right
-    line += '\n'
+    line += formatting.newline()
     return line
 
   buildRow = (row, styledRow, rawRow, defaultAlign='auto') ->
@@ -89,7 +92,8 @@ module.exports = (header, rows, opts={}) ->
       else
         align = defaultAlign
 
-      spaces = largest[col] - row[col].length
+      spaces = largest[col]
+      spaces -= row[col].len() if row.length-1 >= col
       spacesBefore = getSpacesBefore spaces, align
       spacesAfter = spaces - spacesBefore
 
@@ -112,7 +116,7 @@ module.exports = (header, rows, opts={}) ->
         spacesAfter--
         
       line += borderColor ' |' # padding right
-    line += '\n'
+    line += formatting.newline()
     return line
 
   getSpacesBefore = (spacesLeft, align) ->

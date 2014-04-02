@@ -12,7 +12,13 @@ module.exports = (opts) ->
   for opt of defaultOpts
     opts[opt] = opts[opt] or defaultOpts[opt]
 
-  if typeof module != 'undefined'
+  if typeof window != 'undefined'
+    mode = 'browser'
+    url = "http://charts.brace.io/bar.svg?"
+    url += "#{name}=#{values.join ','}&" for name, values of opts
+    return "<object data='#{url}' type='image/svg+xml'>"
+
+  else
     mode = 'console'
     tick = '▇'
     series = {}
@@ -61,9 +67,3 @@ module.exports = (opts) ->
       serien += 1
       output += '\n'
     return output
-
-  else
-    mode = 'browser'
-    url = "http://charts.brace.io/bar.svg?"
-    url += "#{name}=#{values.join ','}&" for name, values of opts
-    return "<object data='#{url}' type='image/svg+xml'>"
