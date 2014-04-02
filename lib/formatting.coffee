@@ -1,4 +1,5 @@
-table = require './tables'
+tables = require './tables'
+charts = require './charts'
 colors = require './colors'
 
 formatting = {}
@@ -8,10 +9,11 @@ if typeof module != 'undefined'
 else
   mode = 'browser'
 
-formatting.table = table
 for style in colors.styles
     formatting[style] = colors[style]
 
+formatting.table = tables
+formatting.chart = charts
 formatting.newline = formatting.n = ->
   if mode == 'console'
     return '\n'
