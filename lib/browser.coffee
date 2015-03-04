@@ -185,6 +185,8 @@ module.exports = (containerID, options) ->
     _background.style.minHeight = ""
     return
 
+  x = 2
+
   output = (html) ->
     if html.join
       output line for line in html
@@ -192,7 +194,13 @@ module.exports = (containerID, options) ->
       html = "<div class='line'>#{html}</div>"
       _output.insertAdjacentHTML "beforeEnd", html
       _cmdLine.scrollIntoView()
-      return
+    else if html instanceof HTMLElement
+      line = document.createElement 'div'
+      line.className = 'line'
+      line.appendChild html
+      _output.appendChild line
+      _cmdLine.scrollIntoView()
+      
   @output = output
 
   @format = @f = require './formatting.coffee'

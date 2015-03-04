@@ -12,7 +12,7 @@
   ],
   "homepage": "http://github.com/fiatjaf/terminal",
   "author": "Giovanni Torres Parra <fiatjaf@gmail.com>",
-  "main": "index.js",
+  "main": "index.coffee",
   "maintainers": [
     {
       "name": "Giovanni Torres Parra",
@@ -30,12 +30,7 @@
     "url": "http://github.com/fiatjaf/terminal"
   },
   "scripts": {
-    "build-dist": "browserify -t coffeeify -s Terminal index.coffee -d -o dist/terminal.js",
-    "build-browser": "browserify -t coffeeify lib/browser.coffee -d -o browser.js",
-    "watch-browser": "watchify -t coffeeify lib/browser.coffee -d -o browser.js -v",
-    "build-node": "browserify -t coffeeify lib/console.coffee -d -o node.js",
-    "watch-node": "watchify -t coffeeify lib/node.coffee -d -o node.js -v",
-    "build-libraries": "coffee -c --bare index.coffee && npm run build-node && npm run build-browser",
+    "build-js": "browserify -t coffeeify -s Terminal index.coffee -d -o dist/terminal.js",
     "build-css": "lessc terminal.less terminal.css",
     "prepublish": "npm run build-libraries",
     "dist": "npm run build-dist && npm run build-css"
@@ -43,12 +38,26 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {},
+  "dependencies": {
+    "coffeeify": "^1.0.0",
+    "browserify-ngannotate": "^0.7.1"
+  },
   "devDependencies": {
     "less": "1.3.3",
     "browserify": "2.35.4",
     "coffee-script": "1.7.1",
     "watchify": "^2.4.0",
     "coffeeify": "^1.0.0"
+  },
+  "browserify": {
+    "transform": [
+      "coffeeify",
+      [
+        "browserify-ngannotate",
+        {
+          "ext": ".coffee"
+        }
+      ]
+    ]
   }
 }
