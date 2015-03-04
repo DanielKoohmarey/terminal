@@ -1,4 +1,4 @@
-parseArgs = require './parseArgs'
+parseArgs = require './parseArgs.coffee'
 
 module.exports = (containerID, options) ->
   defaults =
@@ -20,7 +20,7 @@ module.exports = (containerID, options) ->
     {cmd, args, line} = parseArgs line
     if cmd
       response = options.execute(cmd, args, term) if options.execute
-      response = cmd + ": command not found"  if response is false
+      response = cmd + ": command not found"  if not response
       output response
 
   @output = (str) =>
@@ -30,7 +30,7 @@ module.exports = (containerID, options) ->
       console.log str
     return null
 
-  @format = @f = require './formatting'
+  @format = @f = require './formatting.coffee'
 
   prompt = (callback) ->
     stdin = process.stdin

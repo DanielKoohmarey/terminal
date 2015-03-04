@@ -1,12 +1,11 @@
 # module 'tables'
 
-
 module.exports = (header, rows, opts={}) ->
   # header: [] or null
   # rows: [[]]
 
-  colors = require './colors'
-  formatting = require './formatting'
+  colors = require './colors.coffee'
+  formatting = require './formatting.coffee'
   String.prototype.len = ->
     @.split()[0].replace(/<([^>]*)>/g, '')
                 .replace(/\[[^m]+m/g, '').length

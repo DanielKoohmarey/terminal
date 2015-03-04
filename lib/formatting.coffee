@@ -1,6 +1,6 @@
-tables = require './tables'
-charts = require './charts'
-colors = require './colors'
+tables = require './tables.coffee'
+charts = require './charts.coffee'
+colors = require './colors.coffee'
 
 formatting = {}
 module.exports = formatting

@@ -1,4 +1,4 @@
-parseArgs = require './parseArgs'
+parseArgs = require './parseArgs.coffee'
 
 module.exports = (containerID, options) ->
   
@@ -96,7 +96,7 @@ module.exports = (containerID, options) ->
 
     if cmd
       response = options.execute(cmd, args, term) if options.execute
-      response = cmd + ": command not found"  if response is false
+      response = cmd + ": command not found"  if not response
       output response
     
     # Show the command line.
@@ -167,11 +167,12 @@ module.exports = (containerID, options) ->
     e.preventDefault()
     return
   ), false
+
   @processCommand = (line) ->
     _cmdLine.value = line
     e = new Event("keydown")
     e.keyCode = 13
-    _cmdLine.dispatchEvent e
+    newCommandHandler e
     return
 
   @subscribe = (callback) ->
@@ -194,7 +195,7 @@ module.exports = (containerID, options) ->
       return
   @output = output
 
-  @format = @f = require './formatting'
+  @format = @f = require './formatting.coffee'
 
   @setPrompt = (prompt) ->
     _prompt.innerHTML = prompt + options.separator

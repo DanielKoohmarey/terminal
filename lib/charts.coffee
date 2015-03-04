@@ -1,6 +1,6 @@
 # module 'charts'
 
-{bold, white, yellow, magenta, red, cyan, green} = require './colors'
+{bold, white, yellow, magenta, red, cyan, green} = require './colors.coffee'
 
 module.exports = (opts) ->
   defaultOpts =
@@ -14,7 +14,7 @@ module.exports = (opts) ->
 
   if typeof window != 'undefined'
     mode = 'browser'
-    url = "http://charts.brace.io/bar.svg?"
+    url = "//chartspree.io/bar.svg?"
     url += "#{name}=#{values.join ','}&" for name, values of opts
     return "<object data='#{url}' type='image/svg+xml'>"
 
