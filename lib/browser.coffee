@@ -188,6 +188,9 @@ module.exports = (containerID, options) ->
   x = 2
 
   output = (html) ->
+    if not html
+      return
+
     if html.join
       output line for line in html
     else if typeof html == 'string'
